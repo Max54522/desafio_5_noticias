@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
-import 'presentation/screens/home_screen.dart';
+import '../../domain/entities/post.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+class DetalleScreen extends StatelessWidget {
+  final Post post;
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  // El dato se pasa en el constructor con 'required' (sección 4.3)
+  const DetalleScreen({super.key, required this.post});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorSchemeSeed: Colors.purple,
-        useMaterial3: true,
+    return Scaffold(
+      appBar: AppBar(title: Text('Post ${post.id}')),
+      body: Padding(
+        padding: EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              post.titulo,
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            SizedBox(height: 16),
+            Text(post.cuerpo, style: TextStyle(fontSize: 16)),
+          ],
+        ),
       ),
-      home: const HomeScreen(),
     );
   }
 }
